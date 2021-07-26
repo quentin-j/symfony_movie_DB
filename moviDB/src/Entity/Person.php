@@ -41,6 +41,7 @@ class Person
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
         $this->castings = new ArrayCollection();
     }
 

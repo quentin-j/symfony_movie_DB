@@ -41,6 +41,7 @@ class Genre
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime(); //<= dés la création de l'objet on spécifie sa date de création, si l'objet est récupéré par Doctrine, doctrine s'occupera d'y mettre la valeur qui est dans la BDD
         $this->movies = new ArrayCollection();
     }
 
