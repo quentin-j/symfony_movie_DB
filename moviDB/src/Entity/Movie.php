@@ -35,18 +35,12 @@ class Movie
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Person::class, inversedBy="movies")
-     */
-    private $persons;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="movies")
      */
     private $genres;
 
     public function __construct()
     {
-        $this->persons = new ArrayCollection();
         $this->genres = new ArrayCollection();
     }
 
@@ -87,30 +81,6 @@ class Movie
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Person[]
-     */
-    public function getPersons(): Collection
-    {
-        return $this->persons;
-    }
-
-    public function addPerson(Person $person): self
-    {
-        if (!$this->persons->contains($person)) {
-            $this->persons[] = $person;
-        }
-
-        return $this;
-    }
-
-    public function removePerson(Person $person): self
-    {
-        $this->persons->removeElement($person);
 
         return $this;
     }
