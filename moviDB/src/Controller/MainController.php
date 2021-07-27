@@ -18,7 +18,7 @@ class MainController extends AbstractController
         // $allMovies = $movieRepository->findAll() // <= on pourrait utiliser une variable intermédiare avant de passer la liste à la vue
 
         return $this->render('main/homepage.html.twig', [
-            'movie_list' => $movieRepository->findAll(),
+            'movie_list' => $movieRepository->findAllOrdered(),
         ]);
     }
 }

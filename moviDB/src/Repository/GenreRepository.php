@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +20,27 @@ class GenreRepository extends ServiceEntityRepository
         parent::__construct($registry, Genre::class);
     }
 
+    public function findGenreDemo()
+    {
+        // $entityManager = $this->getEntityManager();
+        // $query = $entityManager->createQuery(    //<= DQL méthode
+        //     '
+        //     SELECT g
+        //     FROM App\Entity\Genre g
+        //     WHERE g.name = :name
+        //     ORDER BY g.name DESC
+        //     '
+        // )->setParameter(':name', $name);
+
+            $qb = $this->createQueryBuilder('g');   //<= query builder méthode
+            $qb->orderBy('g.name');
+                // ->andWhere('g.name = :name');
+                // ->setParameter(':name', $name);
+
+            $query = $qb->getQuery();
+       
+        return $query->getResult();
+    }
     // /**
     //  * @return Genre[] Returns an array of Genre objects
     //  */

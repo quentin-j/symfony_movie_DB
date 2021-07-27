@@ -19,6 +19,77 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+    public function findAllOrdered()
+    {
+        // $entityManager = $this->getEntityManager();
+        // $query = $entityManager->createQuery(
+        //     '
+        //     SELECT m
+        //     FROM App\Entity\Movie m
+        //     ORDER BY m.title ASC
+        //     '
+        // );
+        // return $query->getResult();
+
+        // On récupère un objet query Builder
+        $qb = $this->createQueryBuilder('m');
+        // On préceise les spécificités de la requête
+        $qb->orderBy('m.title', 'ASC');
+        // On récupère un objet query
+        $query = $qb->getQuery();
+        // on envoit les résultats de la requête
+        return $query->getResult();
+
+        // Ici on a toute les étapes ci-dessus en une seul ligne
+        /*
+           return $this->createQueryBuilder('m')
+            ->orderBy('m.title', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+        */
+    }
+
+    public function findOneByGenre($id): ?Movie
+    {
+        // Version avec DQL
+        // $em = $this->getEntityManager();
+        // $query = $em->createQuery(
+        //     "SELECT m, g, c, p
+        //     FROM App\Entity\Movie m
+        //     JOIN m.genres g
+        //     JOIN m.castings c
+        //     JOIN c.person p
+        //     WHERE m.id = :id
+        //     ORDER BY g.name DESC
+        //     "
+        // );
+        // $query->setParameter(':id', $id);
+        // Cette méthode permet de renvoyer un objet ou null si rien n'a été trouvé
+        // return $query->getOneOrNullResult();
+
+        // ou
+        // version avec queryBuilder
+        $qb = $this->createQueryBuilder('m');
+
+        $qb->addSelect('g');
+        $qb->join('m.genres', 'g');
+
+        $qb->addSelect('c');
+        $qb->join('m.castings', 'c');
+
+        $qb->addSelect('p');
+        $qb->join('c.person', 'p');
+
+         $qb->andWhere('m.id = :id');
+         
+         $qb->setParameter(':id', $id);
+
+         $query = $qb->getQuery();
+
+         return $query->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Movie[] Returns an array of Movie objects
     //  */
