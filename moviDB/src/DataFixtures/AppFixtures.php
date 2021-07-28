@@ -86,4 +86,3 @@ class AppFixtures extends Fixture
         $entityManager->flush();
     }
 }
-// composer require fakerphp/faker
