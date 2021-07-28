@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\DataFixtures\Provider\MovieDbProvider;
 use App\Entity\Casting;
 use App\Entity\Genre;
 use App\Entity\Movie;
@@ -13,13 +14,18 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $entityManager)
     {
+        // On instancie un objet faker qui va nous permettre de générer du texte aléatoirement
+        $faker = \Faker\Factory::create('fr_FR');
+
+        // On veut fournir un fournisseur de 
+        $faker->addProvider(new MovieDbProvider($faker));
         // Création de genres
         // On va garder une trace des entités générées pour pouvoir les réutiliser dans les relations
         $genres = [];
         for ($i = 0 ; $i < 10 ; $i++)
         {
             $genre= new Genre();
-            $genre->setName('Genre ' . $i);
+            $genre->setName($faker->unique()->movieGenre());
             $entityManager->persist($genre);
 
             // On veut ce souvenir de tous les genres
@@ -31,7 +37,7 @@ class AppFixtures extends Fixture
         for ($i = 0 ; $i < 50 ; $i++)
         {
             $movie = new Movie();
-            $movie->setTitle('movie ' . $i);
+            $movie->setTitle($faker->realText(50));
 
             // on définit par film un nombre de genre à ajouter
             $nbGenreToAdd = 8;
@@ -55,7 +61,7 @@ class AppFixtures extends Fixture
         for ($i = 0 ; $i < 500 ; $i++) 
         {            
             $person = new Person();
-            $person->setName('person '. $i);
+            $person->setName($faker->unique()->name());
             $entityManager->persist($person);
 
             $persons[] = $person;
@@ -72,7 +78,7 @@ class AppFixtures extends Fixture
             $casting
             ->setMovie($castingMovie)
             ->setPerson($castingPerson)
-            ->setRole('ROLE ' . $i)
+            ->setRole($faker->firstName() . ' le ' . $faker->jobTitle())
             ->setCreditOrder(rand(0, $i));
             $entityManager->persist($casting);
         }
