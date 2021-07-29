@@ -6,4 +6,11 @@
 
 <h1>Ajouter un genre</h1>
 
+{{ form_start(form) }}
+    {{form_errors(form)}}
+
+    {{form_row(form.name)}}
+    {{form_row(form.validate)}}
+
+{{ form_end(form) }}
 {% endblock %}
