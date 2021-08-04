@@ -21,6 +21,26 @@ class GenreController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/admin/genre/{id}", name="admin_genre_read", methods={"GET", "POST"})
+     */
+    public function read(): Response
+    {
+        return $this->render('back/genre/read.html.twig', [
+            'controller_name' => 'GenreController',
+        ]);
+    }
+
+     /**
+     * @Route("/admin/genre/edit/{id}", name="admin_genre_edit", methods={"GET"})
+     */
+    public function edit(): Response    //<= Cette route est facultative, on l'a met ici car on fait du BREAD
+    {
+        return $this->render('back/genre/edit.html.twig', [
+            'controller_name' => 'GenreController',
+        ]);
+    }
+
        /**
      * @Route("/admin/genre/add", name="admin_genre_add", methods={"GET", "POST"})
      */
@@ -45,6 +65,16 @@ class GenreController extends AbstractController
 
         return $this->render('back/genre/add.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+     /**
+     * @Route("/admin/genre/delete/{id}", name="admin_genre_delete", methods={"GET"})
+     */
+    public function delete(): Response
+    {
+        return $this->render('back/genre/browse.html.twig', [
+            'controller_name' => 'GenreController',
         ]);
     }
 }
