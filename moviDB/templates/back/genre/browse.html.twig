@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Liste des genres</h1>
 
+    <a class="btn btn-primary" href="{{ path('admin_genre_add') }}">Ajouter</a>
+
     <ul class="list-group list-group-flush">
         {% for genre in genre_list %}
         <li class="list-group-item"><a href="{{ path('admin_genre_read', {id : genre.id}) }}">{{ genre.name }}</a></li>

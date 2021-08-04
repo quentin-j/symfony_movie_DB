@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1>Liste des films</h1>
+    
+    <a class="btn btn-primary" href="{{ path('admin_movie_add') }}">Ajouter</a>
 
     <ul class="list-group list-group-flush">
         {% for movie in movie_list %}
