@@ -12,9 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class GenreController extends AbstractController
 {
     /**
-     * @Route("/back/genre", name="admin_genre_browse")
+     * @Route("/admin/genre", name="admin_genre_browse", methods="GET")
      */
-    public function index(): Response
+    public function browse(): Response
     {
         return $this->render('back/genre/browse.html.twig', [
             'controller_name' => 'GenreController',
@@ -22,7 +22,7 @@ class GenreController extends AbstractController
     }
 
        /**
-     * @Route("/admin/genre/add", name="admin_genre_add")
+     * @Route("/admin/genre/add", name="admin_genre_add", methods={"GET", "POST"})
      */
     public function add(Request $request): Response
     {
