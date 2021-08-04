@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Genre;
 use App\Form\GenreType;
 use App\Repository\GenreRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,10 +96,10 @@ class GenreController extends AbstractController
      /**
      * @Route("/admin/genre/delete/{id}", name="admin_genre_delete", methods={"GET"})
      */
-    public function delete(): Response
+    public function delete(Genre $genre, EntityManagerInterface $em): Response
     {
-        return $this->render('back/genre/browse.html.twig', [
-            'controller_name' => 'GenreController',
-        ]);
+        $em->remove($genre);
+        $em->flush();
+        return $this->redirectToRoute('admin_genre_browse');
     }
 }

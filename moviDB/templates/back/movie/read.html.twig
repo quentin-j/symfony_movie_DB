@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du movie{% endblock %}
+
+{% block body %}
+    <h1>{{ movie.name }}</h1>
+
+    <a class="btn btn-info" href="{{ path('admin_movie_edit', {"id" : movie.id}) }}">éditer</a>
+     <a class="btn btn-danger" href="{{ path('admin_movie_delete', {"id" : movie.id}) }}">supprimer</a>
+
+    <h2>Liste des film associés</h2>
+    <ul class="list-group list-group-flush">
+        {% for movie in movie.movies %}
+            <li class="list-group-item">{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
