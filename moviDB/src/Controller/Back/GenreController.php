@@ -26,12 +26,13 @@ class GenreController extends AbstractController
     }
 
      /**
-     * @Route("/admin/genre/{id}", name="admin_genre_read", methods={"GET", "POST"})
+     * @Route("/admin/genre/{id}", name="admin_genre_read", requirements={"id"="\d+"}, methods={"GET", "POST"})
      */
-    public function read(): Response
+    public function read(Genre $genre): Response
     {
+        // ici on est sur d'avoir récupérer un objet car le ParamConverter renvoit une 404 dans le cas contraire
         return $this->render('back/genre/read.html.twig', [
-            'controller_name' => 'GenreController',
+            'genre' => $genre,
         ]);
     }
 

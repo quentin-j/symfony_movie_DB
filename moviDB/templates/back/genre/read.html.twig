@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail du genre{% endblock %}
+
+{% block body %}
+    <h1>{{ genre.name }}</h1>
+
+    <h2>Liste des film associés</h2>
+    <ul class="list-group list-group-flush">
+        {% for movie in genre.movies %}
+            <li class="list-group-item">{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
