@@ -17,7 +17,7 @@ class GenreController extends AbstractController
      */
     public function browse(GenreRepository $genreRepo): Response
     {
-        $allGenre = $genreRepo->findAll();
+        $allGenre = $genreRepo->findBy([], ['name' => 'ASC']);
         dump($allGenre);
 
         return $this->render('back/genre/browse.html.twig', [
@@ -49,6 +49,8 @@ class GenreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
+
+            $genre->setUpdatedAt(new \DateTime());
 
             $em ->flush();
 
