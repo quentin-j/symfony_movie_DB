@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GenreController!{% endblock %}
+{% block title %}ajout d'un film{% endblock %}
 
 {% block body %}
 
-<h1>Ajouter un movie</h1>
+<h1>Ajouter un film</h1>
 
 {{ form_start(form) }}
     {{form_errors(form)}}
 
-    {{form_row(form.name)}}
-    <button type="submit">Ajouter</button>
+    {{form_row(form.title)}}
+    {{form_row(form.genres)}}
+
+    <button class="btn btn-primary" type="submit">Ajouter</button>
 
 {{ form_end(form) }}
 {% endblock %}

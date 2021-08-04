@@ -14,16 +14,17 @@ class MovieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, [
+            ->add('title', null, [
                 'label' => 'Nom du movie',
                  'constraints' => [
                      new NotBlank()
                      ]
                         ])
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            // ->add('movies', null, ['multiple' => true])
-            // ->add('validate', SubmitType::class)
+            ->add('genres', null, [
+                'label' => 'genres',
+                'expanded' => false, // <= on passe à true si on veut une liste e case à cochet
+                'multiple' => true
+            ]) 
         ;
     }
 
