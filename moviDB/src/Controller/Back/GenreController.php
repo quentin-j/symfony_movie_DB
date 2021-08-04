@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Back;
 
 use App\Entity\Genre;
 use App\Form\GenreType;
@@ -12,11 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class GenreController extends AbstractController
 {
     /**
-     * @Route("/admin/genre", name="admin_genre_browse")
+     * @Route("/back/genre", name="admin_genre_browse")
      */
     public function index(): Response
     {
-        return $this->render('admin/genre/browse.html.twig', [
+        return $this->render('back/genre/browse.html.twig', [
             'controller_name' => 'GenreController',
         ]);
     }
@@ -43,7 +43,7 @@ class GenreController extends AbstractController
             return $this->redirectToRoute('admin_genre_browse');
         }
 
-        return $this->render('admin/genre/add.html.twig', [
+        return $this->render('back/genre/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }

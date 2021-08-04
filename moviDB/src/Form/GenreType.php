@@ -14,7 +14,7 @@ class GenreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['label' => 'Nom du genre', 'constraints' => new NotBlank()])
+            ->add('name', null, ['label' => 'Nom du genre', 'constraints' => [new NotBlank()]])
             ->add('createdAt')
             ->add('updatedAt')
             ->add('movies', null, ['multiple' => true])

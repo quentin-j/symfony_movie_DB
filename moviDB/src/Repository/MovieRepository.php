@@ -53,41 +53,41 @@ class MovieRepository extends ServiceEntityRepository
     public function findOneByGenre($id): ?Movie
     {
         // Version avec DQL
-        // $em = $this->getEntityManager();
-        // $query = $em->createQuery(
-        //     "SELECT m, g, c, p
-        //     FROM App\Entity\Movie m
-        //     JOIN m.genres g
-        //     JOIN m.castings c
-        //     JOIN c.person p
-        //     WHERE m.id = :id
-        //     ORDER BY g.name DESC
-        //     "
-        // );
-        // $query->setParameter(':id', $id);
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(  // Le LEFT JOIN permet de conserver tout les film le INNER JOIN que ceux qui ont un genre
+            "SELECT m, g, c, p
+            FROM App\Entity\Movie m
+            LEFT JOIN m.genres g
+            LEFT JOIN m.castings c
+            LEFT JOIN c.person p
+            WHERE m.id = :id
+            ORDER BY g.name DESC
+            "
+        );
+        $query->setParameter(':id', $id);
         // Cette méthode permet de renvoyer un objet ou null si rien n'a été trouvé
-        // return $query->getOneOrNullResult();
+        return $query->getOneOrNullResult();
 
         // ou
         // version avec queryBuilder
-        $qb = $this->createQueryBuilder('m');
+        // $qb = $this->createQueryBuilder('m');
 
-        $qb->addSelect('g');
-        $qb->join('m.genres', 'g');
+        // $qb->addSelect('g');
+        // $qb->join('m.genres', 'g');
 
-        $qb->addSelect('c');
-        $qb->join('m.castings', 'c');
+        // $qb->addSelect('c');
+        // $qb->join('m.castings', 'c');
 
-        $qb->addSelect('p');
-        $qb->join('c.person', 'p');
+        // $qb->addSelect('p');
+        // $qb->join('c.person', 'p');
 
-         $qb->andWhere('m.id = :id');
+        //  $qb->andWhere('m.id = :id');
          
-         $qb->setParameter(':id', $id);
+        //  $qb->setParameter(':id', $id);
 
-         $query = $qb->getQuery();
+        //  $query = $qb->getQuery();
 
-         return $query->getOneOrNullResult();
+        //  return $query->getOneOrNullResult();
     }
 
     // /**
