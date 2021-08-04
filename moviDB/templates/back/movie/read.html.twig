@@ -15,4 +15,12 @@
             <li class="list-group-item">{{ genre.name }}</li>
         {% endfor %}
     </ul>
+
+    <h2>Liste des Castings associés</h2>
+
+    <ul class="list-group list-group-flush">
+        {% for casting in movie.castings %}
+            <li class="list-group-item">{{ casting.role }} : {{ casting.person.name }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
