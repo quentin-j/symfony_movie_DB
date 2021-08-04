@@ -4,6 +4,7 @@ namespace App\Controller\Back;
 
 use App\Entity\Genre;
 use App\Form\GenreType;
+use App\Repository\GenreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,13 @@ class GenreController extends AbstractController
     /**
      * @Route("/admin/genre", name="admin_genre_browse", methods="GET")
      */
-    public function browse(): Response
+    public function browse(GenreRepository $genreRepo): Response
     {
+        $allGenre = $genreRepo->findAll();
+        dump($allGenre);
+
         return $this->render('back/genre/browse.html.twig', [
-            'controller_name' => 'GenreController',
+            'genre_list' => $allGenre,
         ]);
     }
 

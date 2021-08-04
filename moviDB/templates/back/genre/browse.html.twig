@@ -1,20 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GenreController!{% endblock %}
+{% block title %}Liste des genres{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Liste des genres</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/sp_symfo/symfony_movie_DB/moviDB/src/Controller/Admin/GenreController.php'|file_link(0) }}">src/Controller/Admin/GenreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/sp_symfo/symfony_movie_DB/moviDB/templates/admin/genre/index.html.twig'|file_link(0) }}">templates/admin/genre/index.html.twig</a></code></li>
+    <ul class="list-group list-group-flush">
+        {% for genre in genre_list %}
+        <li class="list-group-item"><a href="{{ path('admin_genre_read', {id : genre.id}) }}">{{ genre.name }}</a></li>
+        {% endfor %}
     </ul>
-</div>
+
 {% endblock %}
