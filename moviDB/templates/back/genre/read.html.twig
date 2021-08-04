@@ -5,6 +5,8 @@
 {% block body %}
     <h1>{{ genre.name }}</h1>
 
+    <a href="{{ path('admin_genre_edit', {"id" : genre.id}) }}">éditer</a>
+
     <h2>Liste des film associés</h2>
     <ul class="list-group list-group-flush">
         {% for movie in genre.movies %}

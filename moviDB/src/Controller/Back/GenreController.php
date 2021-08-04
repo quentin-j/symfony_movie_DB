@@ -37,12 +37,29 @@ class GenreController extends AbstractController
     }
 
      /**
-     * @Route("/admin/genre/edit/{id}", name="admin_genre_edit", methods={"GET"})
+     * @Route("/admin/genre/edit/{id}", name="admin_genre_edit", methods={"GET", "POST"})
      */
-    public function edit(): Response    //<= Cette route est facultative, on l'a met ici car on fait du BREAD
+    public function edit(Genre $genre, Request $request): Response    //<= Cette route est facultative, on l'a met ici car on fait du BREAD
     {
+
+        $form = $this->createForm(GenreType::class, $genre);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $em ->flush();
+
+            // TODO flash message
+
+            return $this->redirectToRoute('admin_genre_browse');
+        }
+
         return $this->render('back/genre/edit.html.twig', [
-            'controller_name' => 'GenreController',
+            'form' => $form->createView(),
+            'genre' => $genre
         ]);
     }
 
