@@ -55,7 +55,7 @@ class GenreController extends AbstractController
 
             $em ->flush();
 
-            // TODO flash message
+            $this->addFlash('success', 'Genre mis à jour avec success');
 
             return $this->redirectToRoute('admin_genre_browse');
         }
@@ -85,6 +85,8 @@ class GenreController extends AbstractController
             $entityManager->persist($genre);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Genre ajouté avec success');
+
             return $this->redirectToRoute('admin_genre_browse');
         }
 
@@ -100,6 +102,7 @@ class GenreController extends AbstractController
     {
         $em->remove($genre);
         $em->flush();
+        $this->addFlash('danger', 'Genre supprimer ');
         return $this->redirectToRoute('admin_genre_browse');
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/person")
+ * @Route("/admin/person")
  */
 class PersonController extends AbstractController   // <= Controller créé avec la commande bin/console make:crud
 {
