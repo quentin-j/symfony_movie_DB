@@ -102,7 +102,7 @@ class GenreController extends AbstractController
     {
         $em->remove($genre);
         $em->flush();
-        $this->addFlash('danger', 'Genre supprimer ');
+        $this->addFlash('danger', '" ' . $genre->getName() . '" à était supprimé de la liste des genres !');
         return $this->redirectToRoute('admin_genre_browse');
     }
 }
