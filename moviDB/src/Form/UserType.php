@@ -6,6 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
@@ -30,7 +32,15 @@ class UserType extends AbstractType
                     'Utilisateur' => "ROLE_USER",
                 ]
             ])
-            ->add('password')
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'les mots de passe ne correspondent pas !',
+                'required' => false,
+                'first_options' => ['label' => 'Mot de Pasee'],
+                'second_options' => ['label' => 'Répétez le mot de Pasee'],
+
+                'mapped' => false   // <= On spécifie au composant formulaire de na pas enregistrer cette valeur dans l'objet
+            ])
         ;
     }
 

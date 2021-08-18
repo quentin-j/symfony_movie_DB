@@ -30,14 +30,25 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordHasherInterface $userPasswordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $entityManager = $this->getDoctrine()->getManager();
+
+              //récupérer le mot de passe en clair
+              $rawPassword = $request->request->get('user')['password']['first'];
+
+              if (! empty($rawPassword)) {
+                  // l'encoder <= hashage userPasswordEncoderInterface est dépricié donc on utilise userPasswordHasherInterface
+                  $passwordEncoded = $userPasswordEncoder->hashPassword($user, $rawPassword);
+                  // Le renseigner dans l'objet
+                  $user->setPassword($passwordEncoded);
+              }
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -71,11 +82,16 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //récupérer le mot de passe en clair
-            $rawPassword = $request->request->get('user')['password'];
-            // l'encoder
+            $rawPassword = $request->request->get('user')['password']['first'];
+
+            if (! empty($rawPassword))
+            {
+                 // l'encoder <= hashage userPasswordEncoderInterface est dépricié donc on utilise userPasswordHasherInterface
             $passwordEncoded = $userPasswordEncoder->hashPassword($user, $rawPassword);
             // Le renseigner dans l'objet
             $user->setPassword($passwordEncoded);
+            }
+
             // et la on pourra l'enregistrer en BDD
             $this->getDoctrine()->getManager()->flush();
 
