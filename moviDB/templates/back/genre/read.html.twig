@@ -4,10 +4,10 @@
 
 {% block body %}
     <h1>{{ genre.name }}</h1>
-
+     {% if is_granted('ROLE_ADMIN') %}
     <a class="btn btn-info" href="{{ path('admin_genre_edit', {"id" : genre.id}) }}">éditer</a>
      <a class="btn btn-danger" href="{{ path('admin_genre_delete', {"id" : genre.id}) }}">supprimer</a>
-
+    {% endif %}
     <h2>Liste des film associés</h2>
     <ul class="list-group list-group-flush">
         {% for movie in genre.movies %}

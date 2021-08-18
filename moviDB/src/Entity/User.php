@@ -82,6 +82,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+     /**
+     * @see UserInterface
+     */
+    public function getDisplayRole(): string
+    {
+        if (in_array("ROLE_ADMIN", $this->roles)) 
+        {
+            return "administrateur";
+        }
+        else 
+        {
+            return "Utilisateur";
+        }
+        return "";
+    }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;

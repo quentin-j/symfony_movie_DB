@@ -25,7 +25,9 @@
                 <td>{{ person.updatedAt ? person.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ path('person_show', {'id': person.id}) }}">show</a>
+                     {% if is_granted('ROLE_ADMIN') %}
                     <a class="btn btn-warning" href="{{ path('person_edit', {'id': person.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

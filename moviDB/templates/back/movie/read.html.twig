@@ -4,10 +4,10 @@
 
 {% block body %}
     <h1>{{ movie.title }}</h1>
-
+     {% if is_granted('ROLE_ADMIN') %}
     <a class="btn btn-primary" href="{{ path('admin_movie_edit', {"id" : movie.id}) }}">éditer</a>
      <a class="btn btn-danger" href="{{ path('admin_movie_delete', {"id" : movie.id}) }}">supprimer</a>
-
+    {% endif %}
     <h2>Liste des genres associés</h2>
 
     <ul class="list-group list-group-flush">

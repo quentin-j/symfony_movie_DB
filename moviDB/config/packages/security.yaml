@@ -35,5 +35,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin/[^/]+/(new|edit|delete), roles: ROLE_ADMIN }
+        - { path: ^/admin/user, roles: ROLE_ADMIN }
         - { path: ^/admin/, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }
