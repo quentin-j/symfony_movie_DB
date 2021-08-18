@@ -67,7 +67,7 @@ class MovieController extends AbstractController
     }
 
        /**
-     * @Route("/admin/movie/add", name="admin_movie_add", methods={"GET", "POST"})
+     * @Route("/admin/movie/new", name="admin_movie_add", methods={"GET", "POST"})
      */
     public function add(Request $request): Response
     {

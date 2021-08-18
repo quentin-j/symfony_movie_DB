@@ -59,7 +59,7 @@ class PersonController extends AbstractController   // <= Controller créé avec
     }
 
     /**
-     * @Route("/{id}/edit", name="person_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="person_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Person $person): Response
     {
@@ -79,7 +79,7 @@ class PersonController extends AbstractController   // <= Controller créé avec
     }
 
     /**
-     * @Route("/{id}", name="person_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="person_delete", methods={"POST"})
      */
     public function delete(Request $request, Person $person): Response
     {

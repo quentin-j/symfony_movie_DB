@@ -72,7 +72,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordEncoder): Response
     {
@@ -105,7 +105,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user): Response
     {

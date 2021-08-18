@@ -67,7 +67,7 @@ class GenreController extends AbstractController
     }
 
        /**
-     * @Route("/admin/genre/add", name="admin_genre_add", methods={"GET", "POST"})
+     * @Route("/admin/genre/new", name="admin_genre_add", methods={"GET", "POST"})
      */
     public function add(Request $request): Response
     {
