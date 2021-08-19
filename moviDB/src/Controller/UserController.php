@@ -76,6 +76,8 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordEncoder): Response
     {
+        $this->denyAccessUnlessGranted('EDIT', $user);
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
